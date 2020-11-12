@@ -4,7 +4,7 @@ import styled from "styled-components";
 const LayoutContainer = styled.div`
   margin: 8%;
   background-color: whitesmoke;
-  height: 1500px;
+  height: auto;
   border: solid 1px black;
   border-radius: 1%;
 `;

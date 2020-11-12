@@ -9,6 +9,7 @@ import styled from "styled-components";
 
 const ResponsePara = styled.p`
   color: ${(props) => (props.color === "Successful Signup!" ? "green" : "red")};
+  text-align: center;
 `;
 
 const SpinnerDiv = styled.div`
@@ -26,6 +27,7 @@ const SignupForm = (props) => {
   const [password, setPassword] = useState("");
   const [signupResponse, setSignupResponse] = useState("");
   useEffect(() => {
+    // underline animation effect
     const mouseOverFunction = () => {
       let childArray = document.getElementsByClassName("third-container");
       for (let i = 0; i < childArray.length; i++) {
@@ -196,7 +198,7 @@ const SignupForm = (props) => {
           </ResponsePara>
         </Form.Group>
         <Form.Group name={props.name} as={Col} xs={12}>
-          <Button name={props.name} variant="primary" type="submit" block>
+          <Button name={props.name} variant="info" type="submit" block>
             Signup
           </Button>
         </Form.Group>

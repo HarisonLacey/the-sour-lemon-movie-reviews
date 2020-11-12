@@ -12,4 +12,7 @@ module.exports = (app) => {
     app.get("/api/redirect", controller.redirect);
     app.get("/api/items", controller.items);
     app.post("/api/movie", controller.movie);
+    app.post("/api/review", controller.review);
+    app.post("/api/dashboard-reviews", controller.dashboardReviews);
+    app.post("/api/delete", controller.delete);
 }

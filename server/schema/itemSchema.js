@@ -5,7 +5,8 @@ const Item = new Schema({
   image: String,
   title: String,
   description: String,
-  reviews: Array
+  reviews: Array,
+  Category: String
 });
 
 module.exports = mongoose.model("items", Item);

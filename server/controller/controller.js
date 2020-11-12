@@ -301,13 +301,113 @@ module.exports.movie = async (req, res) => {
         break;
       case !true:
         res.status(400).json({ message: "An Error Occured" });
+        break;
+      default:
+        return null;
     }
   } catch (err) {
     res.status(400).json({ message: "An Error Occured" });
   }
 };
 
-// authenticate user
+// save review to item and user
+module.exports.review = async (req, res) => {
+  function Review(id, name, image, review, rating) {
+    this.id = id;
+    this.name = name;
+    this.image = image;
+    this.review = review;
+    this.rating = rating;
+  }
+  try {
+    let user = await User.findOne({ _id: { $eq: req.body.user._id } });
+    switch (user !== null) {
+      case true:
+        let reviewSave = new Review(
+          req.body.movie._id,
+          req.body.movie.title,
+          req.body.movie.image,
+          req.body.review,
+          req.body.rating
+        );
+        user.reviews.push(reviewSave);
+        user.save();
+        res.status(200).json({ message: "Review Submitted!" });
+        break;
+      case !true:
+        res.status(400).json({ message: "An Error Occured" });
+        break;
+      default:
+        return null;
+    }
+  } catch (err) {
+    res.status(400).json({ message: "An Error Occured" });
+  }
+  try {
+    let item = await Item.findOne({ _id: { $eq: req.body.movie._id } });
+    switch (item !== null) {
+      case true:
+        let reviewSave = new Review(
+          req.body.user._id,
+          req.body.user.fullName,
+          req.body.review,
+          req.body.rating
+        );
+        item.reviews.push(reviewSave);
+        item.save();
+        break;
+      case !true:
+        console.log("item null");
+        break;
+      default:
+        return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// dashboard reviews fetch
+module.exports.dashboardReviews = async (req, res) => {
+  try {
+    let user = await User.findOne({ _id: req.body.id });
+    switch (user !== null) {
+      case true:
+        res.status(200).json({ message: user.reviews });
+        break;
+      case !true:
+        res.status(400).json({ message: "An Error Occured" });
+        break;
+      default:
+        return null;
+    }
+  } catch (err) {
+    res.status(400).json({ message: "An Error Occured" });
+  }
+};
+
+// delete user reviews off dashboard
+module.exports.delete = async (req, res) => {
+  try {
+    let user = await User.findOne({ _id: { $eq: req.body.id } });
+    switch (user !== null) {
+      case true:
+        user.reviews = req.body.reviews;
+        user.save();
+        res.status(200).json({ message: "Review Deleted!" });
+        break;
+      case !true:
+        res.status(400).json({ message: "An Error Occured" });
+        break;
+      default:
+        return null;
+    }
+  } catch (err) {
+    res.status(400).json({ message: "An Error Occured" });
+  }
+};
+
+// authenticate user using jwt strategy
 module.exports.authenticated = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (err, user) => {
     if (err) console.log(err.message);

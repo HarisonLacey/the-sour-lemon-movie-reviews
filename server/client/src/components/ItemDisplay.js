@@ -5,6 +5,8 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import styled from "styled-components";
 import Spinner from "react-bootstrap/Spinner";
+import { Link } from "react-router-dom";
+const queryString = require("query-string");
 
 const ItemContainer = styled.div`
   margin-top: 5%;
@@ -18,9 +20,11 @@ const ItemContainer = styled.div`
   }
   img + p {
     text-align: center;
+    text-weight: bold;
   }
   p + p {
     text-align: center;
+    text-weight: bold;
   }
 `;
 const Contain = styled(Container)`
@@ -39,6 +43,12 @@ const SpinnerDiv = styled.div`
   color: black;
 `;
 
+const LinkItem = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
 const ItemDisplay = () => {
   const [display, setDisplay] = useState("");
   useEffect(() => {
@@ -52,6 +62,7 @@ const ItemDisplay = () => {
       }
     };
     itemFetch();
+    // underline animation effect
     const mouseOverFunction = () => {
       let childArray = document.getElementsByClassName("item-container");
       for (let i = 0; i < childArray.length; i++) {
@@ -70,7 +81,7 @@ const ItemDisplay = () => {
         };
       }
     };
-    setTimeout(mouseOverFunction, 5000);
+    setTimeout(mouseOverFunction, 2500);
     const mouseOutFunction = () => {
       let childArray = document.getElementsByClassName("item-container");
       for (let i = 0; i < childArray.length; i++) {
@@ -79,7 +90,7 @@ const ItemDisplay = () => {
         };
       }
     };
-    setTimeout(mouseOutFunction, 5000);
+    setTimeout(mouseOutFunction, 2500);
   }, []);
   const itemDisplay = () => {
     switch (display === "An Error Occured") {
@@ -115,20 +126,51 @@ const ItemDisplay = () => {
             </Col>
           );
         } else {
-          return display.map((e) => (
-            <Col xs={3}>
-              <a href={`/movie?id=${e._id}`}>
-                <ItemContainer>
-                  <div className="item-container">
-                    <Image src={e.image} alt="thumbnail" thumbnail />
-                    <p>{e.title}</p>
-                    <p>{e.year}</p>
-                    <hr />
-                  </div>
-                </ItemContainer>
-              </a>
-            </Col>
-          ));
+          // show certain items based on specific category
+          const query = queryString.parse(window.location.search);
+          if (query.cat) {
+            const newArray = display.filter((e) => e.category === query.cat);
+            return newArray.map((e) => (
+              <Col key={e._id} sm={6} lg={4}>
+                <LinkItem name="form" to={`/movie?id=${e._id}`}>
+                  <ItemContainer name="form">
+                    <div name="form" className="item-container">
+                      <Image
+                        name="form"
+                        src={e.image}
+                        alt="thumbnail"
+                        thumbnail
+                      />
+                      <p name="form">{e.title}</p>
+                      <p name="form">{e.year}</p>
+                      <hr name="form" />
+                    </div>
+                  </ItemContainer>
+                </LinkItem>
+              </Col>
+            ));
+          } else {
+            // show items based on all categories
+            return display.map((e) => (
+              <Col key={e._id} sm={6} lg={4}>
+                <LinkItem name="form" to={`/movie?id=${e._id}`}>
+                  <ItemContainer name="form">
+                    <div name="form" className="item-container">
+                      <Image
+                        name="form"
+                        src={e.image}
+                        alt="thumbnail"
+                        thumbnail
+                      />
+                      <p name="form">{e.title}</p>
+                      <p name="form">{e.year}</p>
+                      <hr name="form" />
+                    </div>
+                  </ItemContainer>
+                </LinkItem>
+              </Col>
+            ));
+          }
         }
       default:
         return null;

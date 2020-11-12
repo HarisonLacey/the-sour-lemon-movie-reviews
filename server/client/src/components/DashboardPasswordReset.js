@@ -8,6 +8,7 @@ import styled from "styled-components";
 const ResponsePara = styled.p`
   color: ${(props) =>
     props.color === "Password Has Been Changed" ? "green" : "red"};
+    text-align: center;
 `;
 
 const SpinnerDiv = styled.div`
@@ -113,7 +114,7 @@ const DashboardPasswordReset = (props) => {
             </Form.Group>
             <Form.Group name={props.name} as={Col} xs={4}></Form.Group>
             <Form.Group name={props.name} as={Col} xs={4}>
-              <Button name={props.name} variant="primary" type="submit">
+              <Button name={props.name} variant="info" type="submit">
                 Reset
               </Button>
             </Form.Group>
@@ -171,7 +172,7 @@ const DashboardPasswordReset = (props) => {
               </ResponsePara>
             </Form.Group>
             <Form.Group name={props.name} as={Col} xs={12}>
-              <Button name={props.name} variant="primary" type="submit" block>
+              <Button name={props.name} variant="info" type="submit" block disabled>
                 Reset
               </Button>
             </Form.Group>

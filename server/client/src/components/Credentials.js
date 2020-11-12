@@ -7,6 +7,7 @@ import PasswordReset from "./PasswordReset";
 import Dashboard from "./Dashboard";
 import close from "../images/close.png";
 import Spinner from "react-bootstrap/Spinner";
+import { sizes } from "./deviceSizes";
 const queryString = require("query-string");
 
 const CredentialContainer = styled.div.attrs((props) => ({
@@ -24,6 +25,14 @@ const CredentialContainer = styled.div.attrs((props) => ({
     &:hover {
       text-decoration: underline;
     }
+    @media screen and (max-width: ${sizes.mobile}) {
+      margin-left: 3%;
+      font-size: 1rem;
+    }
+    @media screen and (min-width: ${sizes.tablet}) and (max-width: ${sizes.laptop}) {
+      margin-left: 3%;
+      font-size: 1rem;
+    }
   }
   .img {
     position: relative;
@@ -31,6 +40,14 @@ const CredentialContainer = styled.div.attrs((props) => ({
     bottom: 1rem;
     &:hover {
       cursor: pointer;
+    }
+    @media screen and (max-width: ${sizes.mobile}) {
+      left: 19rem;
+      bottom: 0.6rem;
+    }
+    @media screen and (min-width: ${sizes.tablet}) and (max-width: ${sizes.laptop}) {
+      left: 19rem;
+      bottom: 0.2rem;
     }
   }
   h5 {
@@ -44,7 +61,8 @@ const CredentialContainer = styled.div.attrs((props) => ({
     color: black;
     text-decoration: none;
   }
-  p, .credLoad {
+  p,
+  .credLoad {
     font-weight: bold;
     font-size: 0.8rem;
   }
@@ -53,6 +71,7 @@ const CredentialContainer = styled.div.attrs((props) => ({
   }
 `;
 
+// contains signup and login forms
 const FormContainer = styled.div`
   position: relative;
   right: 34rem;
@@ -65,6 +84,14 @@ const FormContainer = styled.div`
   opacity: 95%;
   position: relative;
   z-index: 1;
+  @media screen and (max-width: ${sizes.mobile}) {
+    right: 14.3rem;
+    top: 5rem;
+  }
+  @media screen and (min-width: ${sizes.tablet}) and (max-width: ${sizes.laptop}) {
+    right: 21.8rem;
+    top: 5rem;
+  }
 `;
 
 const Credentials = (props) => {
@@ -93,6 +120,7 @@ const Credentials = (props) => {
     };
     queryCheck();
     window.addEventListener("click", (e) => {
+      const query = queryString.parse(window.location.search);
       const att = e.target.getAttribute("name");
       switch (att) {
         case "login":
@@ -110,8 +138,13 @@ const Credentials = (props) => {
         case "form":
           return null;
         case null:
-          window.history.pushState("", "", "/");
-          setFormType(null);
+          if (query.id === undefined) {
+            window.history.pushState("", "", "/");
+            setFormType(null);
+          } else {
+            window.history.pushState("", "", window.location.href);
+            setFormType(null);
+          }
           break;
         default:
           return null;
@@ -179,9 +212,7 @@ const Credentials = (props) => {
               src={close}
               alt="close"
             />
-            <Dashboard
-              name="form"
-            />
+            <Dashboard auth={props.auth} name="form" />
           </FormContainer>
         );
       default:

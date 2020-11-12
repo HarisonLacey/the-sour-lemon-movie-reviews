@@ -66,7 +66,7 @@ const EmailConfirmation = (props) => {
           </ResponsePara>
         </Form.Group>
         <Form.Group name={props.name} as={Col} xs={12}>
-          <Button name={props.name} variant="primary" type="submit" block>
+          <Button name={props.name} variant="info" type="submit" block>
             Send
           </Button>
         </Form.Group>

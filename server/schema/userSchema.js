@@ -12,7 +12,8 @@ const User = new Schema({
   email: Array,
   password: String,
   reset_token: String,
-  thirdParty: Boolean
+  thirdParty: Boolean,
+  reviews: Array
 });
 
 const options = {
