@@ -350,6 +350,7 @@ module.exports.review = async (req, res) => {
         let reviewSave = new Review(
           req.body.user._id,
           req.body.user.fullName,
+          null,
           req.body.review,
           req.body.rating
         );

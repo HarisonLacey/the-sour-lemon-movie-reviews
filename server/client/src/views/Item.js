@@ -150,10 +150,16 @@ const Item = () => {
               onChange={reviewChange}
               type="text"
               placeholder="Your review..."
+              required
             />
           </Form.Group>
           <Form.Group name="form" controlId="exampleForm.ControlSelect1">
-            <Form.Control name="form" onChange={ratingChange} as="select">
+            <Form.Control
+              name="form"
+              onChange={ratingChange}
+              as="select"
+              required
+            >
               <option>Your rating...</option>
               <option>0</option>
               <option>0.5</option>

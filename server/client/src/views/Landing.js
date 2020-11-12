@@ -17,10 +17,10 @@ const LeftCol = styled(Col)`
 `;
 
 const RightCol = styled(Col)`
-@media screen and (min-width: 1376px) {
-  border-right: solid 1px lightgrey;
-}
-`
+  @media screen and (min-width: 1376px) {
+    border-right: solid 1px lightgrey;
+  }
+`;
 
 const UL = styled.ul`
   display: ${(props) => (props.show === true ? "block" : "none")};
@@ -35,10 +35,18 @@ const UL = styled.ul`
     border-radius: 3%;
     height: 40px;
     padding-top: 1%;
+    border-radius: 0.3rem;
   }
   hr {
     width: 0;
     margin: 0;
+  }
+  a {
+    color: black;
+    font-weight: bold;
+  }
+  a:hover {
+    text-decoration: none;
   }
 `;
 
@@ -106,7 +114,16 @@ const Landing = () => {
 
   // function to map category label names
   const categoryLinks = () => {
-    const labels = ["all", "adventure", "comedy"];
+    const labels = [
+      "all",
+      "fantasy",
+      "kids",
+      "horror",
+      "musical",
+      "mystery",
+      "sport",
+      "Science fiction",
+    ];
     const toCapital = (el) => {
       return el.charAt(0).toUpperCase() + el.slice(1);
     };
@@ -114,22 +131,18 @@ const Landing = () => {
       if (e === "all") {
         return (
           <div className="list-div">
-            <li>
-              <a name="form" href="/">
-                {toCapital(e)}
-              </a>
-            </li>
+            <a name="form" href="/">
+              <li>{toCapital(e)}</li>
+            </a>
             <hr />
           </div>
         );
       } else {
         return (
           <div className="list-div">
-            <li>
-              <a name="form" href={`?cat=${e}`}>
-                {toCapital(e)}
-              </a>
-            </li>
+            <a name="form" href={`?cat=${e}`}>
+              <li>{toCapital(e)}</li>
+            </a>
             <hr />
           </div>
         );

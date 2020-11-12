@@ -18,7 +18,7 @@ const Img = styled(Image)`
   width: 30%;
 `;
 
-const Heading = styled.h5`
+const Heading = styled.h6`
   text-align: center;
 `;
 // border color depending on rating

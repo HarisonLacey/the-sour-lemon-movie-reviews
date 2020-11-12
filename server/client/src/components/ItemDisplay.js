@@ -20,11 +20,13 @@ const ItemContainer = styled.div`
   }
   img + p {
     text-align: center;
-    text-weight: bold;
+    color: black;
+    font-weight: bold;
+    font-size: 1.1rem;
   }
   p + p {
     text-align: center;
-    text-weight: bold;
+    color: black;
   }
 `;
 const Contain = styled(Container)`
