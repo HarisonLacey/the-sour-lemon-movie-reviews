@@ -122,7 +122,7 @@ const Landing = () => {
       "musical",
       "mystery",
       "sport",
-      "Science fiction",
+      "science fiction",
     ];
     const toCapital = (el) => {
       return el.charAt(0).toUpperCase() + el.slice(1);

@@ -12,7 +12,12 @@ module.exports.googlePassport = (passport) => {
       },
       (accessToken, refreshToken, profile, cb) => {
         User.findOrCreate(
-          { fullName: profile.displayName, googleId: profile.id, email: profile.emails, thirdParty: true },
+          {
+            fullName: profile.displayName,
+            googleId: profile.id,
+            email: profile.emails,
+            thirdParty: true,
+          },
           (err, user) => {
             return cb(err, user);
           }
@@ -37,4 +42,4 @@ module.exports.googleRoutes = (app) => {
       res.redirect("http://localhost:3000/redirect");
     }
   );
-}
+};

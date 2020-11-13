@@ -12,7 +12,11 @@ module.exports.facebookPassport = (passport) => {
       },
       (accessToken, refreshToken, profile, cb) => {
         User.findOrCreate(
-          { fullName: profile.displayName, facebookId: profile.id, thirdParty: true },
+          {
+            fullName: profile.displayName,
+            facebookId: profile.id,
+            thirdParty: true,
+          },
           (err, user) => {
             return cb(err, user);
           }

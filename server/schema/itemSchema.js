@@ -6,7 +6,7 @@ const Item = new Schema({
   title: String,
   description: String,
   reviews: Array,
-  Category: String
+  Category: String,
 });
 
 module.exports = mongoose.model("items", Item);

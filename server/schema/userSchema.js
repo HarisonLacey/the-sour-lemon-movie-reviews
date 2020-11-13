@@ -8,12 +8,12 @@ const User = new Schema({
   lastName: String,
   fullName: String,
   googleId: String,
-  facebookId: String, 
+  facebookId: String,
   email: Array,
   password: String,
   reset_token: String,
   thirdParty: Boolean,
-  reviews: Array
+  reviews: Array,
 });
 
 const options = {
@@ -30,7 +30,10 @@ const options = {
   },
 };
 
-User.plugin(passportLocalMongoose, { usernameField: "email", errorMessages: options.errorMessages } );
+User.plugin(passportLocalMongoose, {
+  usernameField: "email",
+  errorMessages: options.errorMessages,
+});
 User.plugin(findOrCreate);
 
 module.exports = mongoose.model("users", User);

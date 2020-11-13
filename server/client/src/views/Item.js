@@ -53,7 +53,7 @@ const Description = styled.div`
 const Cards = styled(Card)`
   margin-bottom: 5%;
   border: ${(props) =>
-    props.border > "2.5" ? "solid 2px #a8df65" : "solid 2px #ec524b"};
+    props.border >= "2.5" ? "solid 2px #a8df65" : "solid 2px #ec524b"};
   box-shadow: 0 5px 10px lightgrey;
 `;
 
@@ -238,7 +238,6 @@ const Item = () => {
     if (isNaN(average)) {
       return <Average font="small">No Rating</Average>;
     } else {
-      console.log(average);
       return <Average font="large">{average.toFixed(1)} / 5</Average>;
     }
   };
