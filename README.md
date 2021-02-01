@@ -1,6 +1,6 @@
 # The Sour Lemon Movie Reviews
 
-This is a MERN stack application that lets users review their favourite movies.
+This is a MERN stack application built from scratch that lets users review their favourite movies.
 
 This application uses Passport.js and JSON Web Tokens to authenticate users.
 
