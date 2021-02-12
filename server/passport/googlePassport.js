@@ -9,6 +9,7 @@ module.exports.googlePassport = (passport) => {
         clientID: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
         callbackURL: "http://localhost:3001/auth/google/callback",
+        userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
       },
       (accessToken, refreshToken, profile, cb) => {
         User.findOrCreate(
